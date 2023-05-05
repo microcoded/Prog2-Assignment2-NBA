@@ -10,10 +10,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
 
-<VBox  alignment="CENTER" styleClass="background" prefHeight="450.0" prefWidth="350.0" spacing="20" xmlns:fx="http://javafx.com/fxml/1"
-       >
+<VBox fx:controller="controller.SeasonController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background" prefHeight="450.0" prefWidth="400.0"
+      spacing="10">
+    <ImageView id="playoffsImage" fitWidth="400" preserveRatio="true" >
+        <image>
+            <Image url="@NBA_Back.jpg" />
+        </image>
+    </ImageView>
 
+    <GridPane fx:id="buttonGrid" hgap="20" vgap="20" GridPane.halignment="CENTER" GridPane.valignment="CENTER" alignment="CENTER">
+        <Button fx:id="roundButton" text="Round" onAction="#roundPressed" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Button fx:id="currentButton" text="Current" onAction="#currentPressed" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Button fx:id="gameButton" text="Game" onAction="#gamePressed" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <Button fx:id="resultButton" text="Result" onAction="#resultPressed" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+        <Button fx:id="closeButton" text="Close" onAction="#close" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+    </GridPane>
     
         
     <stylesheets>

@@ -38,7 +38,7 @@ public class AssociationController extends Controller<Association> {
             stage.setX(ViewLoader.X + 601);
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/nba.png"));
-            
+            stage.setResizable(false);
             ViewLoader.showStage(getAssociation().getTeams(), "/view/ExploreTeamsView.fxml", "Explore Teams", stage);
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
@@ -51,6 +51,7 @@ public class AssociationController extends Controller<Association> {
             stage.setX(ViewLoader.X + 601);
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/nba.png"));
+            stage.setResizable(false);
             ViewLoader.showStage(getAssociation().getSeason(), "/view/SeasonView.fxml", "Arrange a new season", stage);
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
