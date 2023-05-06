@@ -13,8 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.Association;
+import model.Teams;
 
-public class ExploreTeamsController extends Controller<Association> {
+public class ExploreTeamsController extends Controller<Teams> {
 
     @FXML
     private Button teamsMenuButton;
@@ -28,7 +29,7 @@ public class ExploreTeamsController extends Controller<Association> {
     @FXML
     private GridPane buttonGrid;
     
-    public Association getAssociation(){
+    public Teams getTeams(){
         return this.model;
     }
     
@@ -39,8 +40,8 @@ public class ExploreTeamsController extends Controller<Association> {
             stage.setX(ViewLoader.X + 601);
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/nba.png"));
-            
-            ViewLoader.showStage(getAssociation().getTeams(), "/view/TeamsTable.fxml", "Teams Menu", stage);
+            stage.setResizable(false);
+            ViewLoader.showStage(getTeams(), "/view/TeamsTable.fxml", "Teams Menu", stage);
         } catch (IOException ex) {
             Logger.getLogger(ExploreTeamsController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,7 +53,8 @@ public class ExploreTeamsController extends Controller<Association> {
             stage.setX(ViewLoader.X + 601);
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/nba.png"));
-            ViewLoader.showStage(getAssociation().getSeason(), "/view/PlayersView.fxml", "Players", stage);
+            stage.setResizable(false);
+            ViewLoader.showStage(getTeams(), "/view/PlayersView.fxml", "Players", stage);
         } catch (IOException ex) {
             Logger.getLogger(ExploreTeamsController.class.getName()).log(Level.SEVERE, null, ex);
         }
