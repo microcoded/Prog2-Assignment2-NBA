@@ -26,7 +26,7 @@
         <TextFlow GridPane.rowIndex="0" GridPane.columnIndex="0" textAlignment="LEFT">
             <Label text="Name:"/>
         </TextFlow>
-        <TextField fx:id="teamTf" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="280"/>
+        <TextField fx:id="nameTf" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="280"/>
     </GridPane>
     <Button fx:id="addButton" text="Add" onAction="#add" disable="true"/>
     <stylesheets>

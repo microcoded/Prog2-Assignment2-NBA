@@ -6,6 +6,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
@@ -29,7 +30,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TeamsController extends Controller<Teams> implements Initializable {
+public class TeamsController extends Controller<Teams> {
     @FXML
     private Button addButton;
 
@@ -95,8 +96,8 @@ public class TeamsController extends Controller<Teams> implements Initializable 
             return new DecimalFormat("#.00").format(value);
         }
     }
-    @Override
-    public void initialize(URL a, ResourceBundle b) {
+    @FXML
+    public void initialize() {
         teamsTV.setItems(parseTeams());
 
         // Select no row by default
@@ -140,25 +141,36 @@ public class TeamsController extends Controller<Teams> implements Initializable 
         }
     }
 
+    public void deselect() {
+        teamsTV.getSelectionModel().select(null);
+        manageButton.setDisable(true);
+        deleteButton.setDisable(true);
+    }
     @FXML
     public void manage() {
-        TeamInList selectedTeam = (TeamInList) teamsTV.getSelectionModel().getSelectedItem();
-        String name = selectedTeam.getName();
-
         try {
+            TeamInList selectedTeam = (TeamInList) teamsTV.getSelectionModel().getSelectedItem();
+            String name = selectedTeam.getName();
+
+            // Might need https://stackoverflow.com/questions/14187963/passing-parameters-javafx-fxml
+
             Stage stage = new Stage();
             stage.setX(ViewLoader.X + 601);
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/edit.png"));
             stage.setResizable(false);
             ViewLoader.showStage(getTeams(), "/view/ManageTeamView.fxml", "Managing Team: " + name, stage);
+            // Deselect buttons
+            deselect();
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
-    public void delete() {}
+    public void delete() {
+        deselect();
+    }
 
     @FXML
     public void close() {
