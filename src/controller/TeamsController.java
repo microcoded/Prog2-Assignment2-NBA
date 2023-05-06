@@ -1,6 +1,7 @@
 package controller;
 
 import au.edu.uts.ap.javafx.Controller;
+import au.edu.uts.ap.javafx.ViewLoader;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Association;
@@ -17,18 +19,22 @@ import model.Team;
 import model.Teams;
 
 import javafx.scene.control.TableColumn;
+
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TeamsController extends Controller<Teams> implements Initializable {
     @FXML
     private Button addButton;
 
     @FXML
-    private Button mangeButton;
+    private Button manageButton;
 
     @FXML
     private Button deleteButton;
@@ -91,12 +97,19 @@ public class TeamsController extends Controller<Teams> implements Initializable 
     }
     @Override
     public void initialize(URL a, ResourceBundle b) {
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        players.setCellValueFactory(new PropertyValueFactory<>("players"));
-        credit.setCellValueFactory(new PropertyValueFactory<>("credit"));
-        age.setCellValueFactory(new PropertyValueFactory<>("age"));
-
         teamsTV.setItems(parseTeams());
+
+        // Select no row by default
+        teamsTV.getSelectionModel().select(null);
+
+        // Disable  buttons when no item is selected
+        teamsTV.getSelectionModel().selectedItemProperty().addListener(
+                (o, oldTeam, newTeam) -> {
+                    manageButton.setDisable(teamsTV.getSelectionModel().selectedItemProperty() == null);
+                    deleteButton.setDisable(teamsTV.getSelectionModel().selectedItemProperty() == null);
+                }
+        );
+
     }
 
     private ObservableList<TeamInList> parseTeams() {
@@ -114,10 +127,35 @@ public class TeamsController extends Controller<Teams> implements Initializable 
     }
 
     @FXML
-    public void add() {}
+    public void add() {
+        try {
+            Stage stage = new Stage();
+            stage.setX(ViewLoader.X + 601);
+            stage.setY(ViewLoader.Y);
+            stage.getIcons().add(new Image("/view/edit.png"));
+            stage.setResizable(false);
+            ViewLoader.showStage(getTeams(), "/view/AddTeam.fxml", "Adding New Team", stage);
+        } catch (IOException ex) {
+            Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
-    public void manage() {}
+    public void manage() {
+        TeamInList selectedTeam = (TeamInList) teamsTV.getSelectionModel().getSelectedItem();
+        String name = selectedTeam.getName();
+
+        try {
+            Stage stage = new Stage();
+            stage.setX(ViewLoader.X + 601);
+            stage.setY(ViewLoader.Y);
+            stage.getIcons().add(new Image("/view/edit.png"));
+            stage.setResizable(false);
+            ViewLoader.showStage(getTeams(), "/view/ManageTeamView.fxml", "Managing Team: " + name, stage);
+        } catch (IOException ex) {
+            Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
     public void delete() {}
