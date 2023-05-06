@@ -33,7 +33,7 @@ public class AddTeamController extends Controller<Teams> {
 
     @FXML
     public void add() {
-
+        
     }
 
 
