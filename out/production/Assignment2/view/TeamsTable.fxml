@@ -14,8 +14,28 @@
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>  
 
-<VBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1"  styleClass="background">
-   
+<VBox fx:controller="controller.TeamsController" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1"  styleClass="background" prefWidth="800.0">
+
+    <Label styleClass="label-header" text="All Teams"/>
+    <TableView fx:id="teamsTV">
+        <columnResizePolicy>
+            <!-- Remove extra blank column and have sizing be correct -->
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+        <columns>
+            <TableColumn fx:id="name" text="Team Name" />
+            <TableColumn fx:id="players" text="Number of Players" />
+            <TableColumn fx:id="credit" text="Average Player Credit" />
+            <TableColumn fx:id="age" text="Average Age" />
+        </columns>
+    </TableView>
+
+    <GridPane fx:id="buttonGrid" hgap="15" vgap="20" GridPane.halignment="CENTER" GridPane.valignment="CENTER" alignment="CENTER" prefHeight="90">
+        <Button fx:id="addButton" text="Add" onAction="#add" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Button fx:id="manageButton" text="Manage" onAction="#manage" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Button fx:id="deleteButton" text="Delete" onAction="#delete" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <Button fx:id="closeButton" text="Close" onAction="#close" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+    </GridPane>
     
     <stylesheets>
         <URL value="@style.css"/>
