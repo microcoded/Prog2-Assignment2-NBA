@@ -15,10 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.Association;
-import model.Players;
-import model.Team;
-import model.Teams;
+import model.*;
 
 import javafx.scene.control.TableColumn;
 
@@ -68,38 +65,6 @@ public class TeamsController extends Controller<Teams> {
         return this.model;
     }
 
-    public class TeamInList {
-        String name;
-        Integer playerCount;
-        Double avgCredit;
-        Double age;
-        public TeamInList(String name, Integer playerCount, Double avgCredit, Double age) {
-            this.name = name;
-            this.playerCount = playerCount;
-            this.avgCredit = avgCredit;
-            this.age = age;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public Integer getPlayers() {
-            return playerCount;
-        }
-
-        public String getCredit() {
-            return formatDouble(avgCredit);
-        }
-
-        public String getAge() {
-            return formatDouble(age);
-        }
-
-        private String formatDouble(double value) {
-            return new DecimalFormat("#####0.00").format(value);
-        }
-    }
     @FXML
     public void initialize() {
         teamsTV.setItems(parseTeams());
@@ -119,20 +84,20 @@ public class TeamsController extends Controller<Teams> {
                 }
         );
 
+        // Deselect cell if clicked twice
+        teamsTV.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                deselect();
+            }
+        });
     }
 
-    private ObservableList<TeamInList> parseTeams() {
-        ObservableList<TeamInList> teamsList = FXCollections.observableArrayList();
-        int i = 0;
-        for (Team team : getTeams().currentTeams()) {
-            String name = team.getName();
-            Integer players = team.getPlayers().getPlayersList().size();
-            Double credit = team.countAvgCreditProperty().get();
-            Double age = team.countAvgAgeProperty().get();
-            teamsList.add(i, new TeamInList(name, players, credit, age));
-            i++;
-        }
-        return teamsList;
+    private ObservableList<Team> parseTeams() {
+        ObservableList<Team> teamList = getTeams().currentTeams();
+        players.setCellValueFactory(count -> count.getValue().countPlayerProperty().asObject());
+        credit.setCellValueFactory(avgCredit -> avgCredit.getValue().countAvgCreditProperty().asObject());
+        age.setCellValueFactory(avgAge -> avgAge.getValue().countAvgAgeProperty().asObject());
+        return teamList;
     }
 
     public void refreshTable() {
@@ -159,10 +124,11 @@ public class TeamsController extends Controller<Teams> {
         teamsTV.getSelectionModel().select(null);
         manageButton.setDisable(true);
         deleteButton.setDisable(true);
+        addButton.setDisable(false);
     }
 
     public String selectedTeam() {
-        TeamInList selectedTeam = (TeamInList) teamsTV.getSelectionModel().getSelectedItem();
+        Team selectedTeam = (Team) teamsTV.getSelectionModel().getSelectedItem();
         return selectedTeam.getName();
     }
 
@@ -187,7 +153,6 @@ public class TeamsController extends Controller<Teams> {
     public void delete() {
         getTeams().remove(getTeams().getTeam(selectedTeam()));
         deselect();
-        refreshTable();
     }
 
     @FXML
