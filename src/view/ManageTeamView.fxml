@@ -33,13 +33,13 @@
                 <cellValueFactory><PropertyValueFactory property="name"/></cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="credit" text="Player credit">
-                <cellValueFactory><PropertyValueFactory property="players"/></cellValueFactory>
-            </TableColumn>
-            <TableColumn fx:id="age" text="Player Age">
                 <cellValueFactory><PropertyValueFactory property="credit"/></cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="no" text="Player No">
+            <TableColumn fx:id="age" text="Player Age">
                 <cellValueFactory><PropertyValueFactory property="age"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="No" text="Player No">
+                <cellValueFactory><PropertyValueFactory property="No"/></cellValueFactory>
             </TableColumn>
         </columns>
     </TableView>

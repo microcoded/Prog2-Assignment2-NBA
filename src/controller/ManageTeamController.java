@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -13,6 +14,8 @@ import model.Player;
 import model.Players;
 import model.Team;
 import model.Teams;
+
+import java.text.DecimalFormat;
 
 public class ManageTeamController extends Controller<Teams> {
     public Teams getTeams() {
@@ -25,6 +28,10 @@ public class ManageTeamController extends Controller<Teams> {
     @FXML private Button addButton;
     @FXML private Button deleteButton;
     @FXML private Button closeButton;
+    @FXML private TableColumn name;
+    @FXML private TableColumn credit;
+    @FXML private TableColumn age;
+    @FXML private TableColumn No;
 
     @FXML
     public void initialize() {
@@ -55,16 +62,7 @@ public class ManageTeamController extends Controller<Teams> {
     }
 
     private ObservableList<Player> parsePlayers() {
-        ObservableList<Player> playerList = FXCollections.observableArrayList();
-        Players players = getTeams().getTeam(TeamsController.teamName).getPlayers();
-        int i = 0;
-        for (Player player : players.getPlayersList()) {
-            String name = player.getName();
-            Double credit = player.getCredit();
-            Integer age = player.getAge();
-            Integer No = player.getNo();
-            playerList.add(i, new Player(name, credit, age, No));
-        }
+        ObservableList<Player> playerList = getTeams().getTeam(TeamsController.teamName).getPlayers().getPlayersList();
         return playerList;
     }
 

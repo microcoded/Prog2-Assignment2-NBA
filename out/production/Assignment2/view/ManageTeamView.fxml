@@ -14,9 +14,43 @@
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>  
 
-<VBox   alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1"  styleClass="background">
-    
-    
+<VBox fx:controller="controller.ManageTeamController" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1"  styleClass="background" prefWidth="800.0">
+
+    <HBox alignment="CENTER">
+        <padding>
+            <Insets bottom="10" top="10"/>
+        </padding>
+        <Label text="Team Name: "/>
+        <TextField fx:id="nameTf" />
+    </HBox>
+    <TableView fx:id="manageTeamTV">
+        <columnResizePolicy>
+            <!-- Remove extra blank column and have sizing be correct -->
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+        <columns>
+            <TableColumn fx:id="name" text="Player Name">
+                <cellValueFactory><PropertyValueFactory property="name"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="credit" text="Player credit">
+                <cellValueFactory><PropertyValueFactory property="credit"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="age" text="Player Age">
+                <cellValueFactory><PropertyValueFactory property="age"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="No" text="Player No">
+                <cellValueFactory><PropertyValueFactory property="No"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <GridPane fx:id="buttonGrid" hgap="15" vgap="20" GridPane.halignment="CENTER" GridPane.valignment="CENTER" alignment="CENTER" prefHeight="90">
+        <Button fx:id="addButton" text="Add" onAction="#add" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Button fx:id="manageButton" text="Update" onAction="#update" GridPane.rowIndex="0" GridPane.columnIndex="1" disable="true"/>
+        <Button fx:id="deleteButton" text="Delete" onAction="#delete" GridPane.rowIndex="0" GridPane.columnIndex="2" disable="true"/>
+        <Button fx:id="closeButton" text="Save and Close" onAction="#close" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+    </GridPane>
+
     <stylesheets>
         <URL value="@style.css"/>
     </stylesheets>
