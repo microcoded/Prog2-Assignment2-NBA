@@ -22,7 +22,7 @@
     </padding>
 
     <Label text="Message:"/>
-    <Text fx:id="errorLbl" styleClass="text-out" text="Not implemented"/>
+    <Text fx:id="errorTxt" styleClass="text-out" text="Not implemented"/>
     <Button fx:id="okButton" text="Okay" onAction="#close"/>
 
     <stylesheets>

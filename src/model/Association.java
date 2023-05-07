@@ -1,8 +1,12 @@
 package model;
 
+import controller.Validator;
+
 public class Association {
     private Teams teams;
     private Season season;
+
+    public static Validator validator = new Validator();
 
     public Association() {
         this.teams = new Teams();

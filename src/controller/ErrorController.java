@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Association;
 import model.Teams;
 
 public class ErrorController extends Controller<Teams> {
@@ -13,18 +14,21 @@ public class ErrorController extends Controller<Teams> {
     private Button okButton;
 
     @FXML
-    private Text errorLbl;
+    private Text errorTxt;
 
     @FXML
     public void initialize() {
-
+        String error = "";
+        for (String err : Association.validator.errors()) {
+            error += err + "\n";
+        }
+        if (!error.equals("")) {
+            errorTxt.setText(error);
+        }
+        Association.validator.errors().clear();
     }
 
     @FXML
-    public void setErrorLbl(String err) {
-        errorLbl.setText(err);
-    }
-
     public void close() {
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();

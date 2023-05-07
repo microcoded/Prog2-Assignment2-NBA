@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.Association;
 import model.Team;
 import model.Teams;
 
@@ -47,6 +48,7 @@ public class AddTeamController extends Controller<Teams> {
         String name = nameTf.getText();
         if (getTeams().hasTeam(name)) {
             try {
+                Association.validator.addError(name + " Team already exists");
                 Stage stage = new Stage();
                 stage.setX(ViewLoader.X + 601);
                 stage.setY(ViewLoader.Y);

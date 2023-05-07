@@ -59,7 +59,10 @@ public class TeamsController extends Controller<Teams> {
     @FXML
     private TableColumn<Team, Double> credit;
 
-    @FXML TableColumn<Team, Double> age;
+    @FXML
+    private TableColumn<Team, Double> age;
+
+    public static String teamName;
 
     public Teams getTeams() {
         return this.model;
@@ -103,12 +106,16 @@ public class TeamsController extends Controller<Teams> {
 
         // Select no row by default
         teamsTV.getSelectionModel().select(null);
+        teamsTV.getProperties().put("selectFocusOnGrain", false);
 
-        // Disable  buttons when no item is selected
+        // Disable manage and delete buttons when nothing is selected
+        // Disable add button when something is selected
         teamsTV.getSelectionModel().selectedItemProperty().addListener(
                 (o, oldTeam, newTeam) -> {
                     manageButton.setDisable(teamsTV.getSelectionModel().selectedItemProperty() == null);
                     deleteButton.setDisable(teamsTV.getSelectionModel().selectedItemProperty() == null);
+                    addButton.setDisable(teamsTV.getSelectionModel().selectedItemProperty() != null);
+                    teamName = selectedTeam();
                 }
         );
 
