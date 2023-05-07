@@ -163,9 +163,6 @@ public class TeamsController extends Controller<Teams> {
     public void manage() {
         try {
             String name = selectedTeam();
-
-            // Might need https://stackoverflow.com/questions/14187963/passing-parameters-javafx-fxml
-
             Stage stage = new Stage();
             stage.setX(ViewLoader.X + 601);
             stage.setY(ViewLoader.Y);

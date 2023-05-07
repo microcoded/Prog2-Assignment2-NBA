@@ -13,11 +13,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1"
+<?import javafx.geometry.Insets?>
+<VBox fx:controller="controller.ErrorController" xmlns:fx="http://javafx.com/fxml/1"
       alignment="center"
       styleClass="background" spacing="10" prefHeight="300.0" prefWidth="350.0">
-	
-    
+    <padding>
+        <Insets bottom="20" />
+    </padding>
+
+    <Label text="Message:"/>
+    <Text fx:id="errorLbl" styleClass="text-out" text="Not implemented"/>
+    <Button fx:id="okButton" text="Okay" onAction="#close"/>
+
     <stylesheets>
         <URL value="@style.css"/>
     </stylesheets>

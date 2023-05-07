@@ -10,16 +10,17 @@ import model.Teams;
 
 public class ErrorController extends Controller<Teams> {
     @FXML
-    Button okButton;
+    private Button okButton;
 
     @FXML
-    Text errorLbl;
+    private Text errorLbl;
 
     @FXML
     public void initialize() {
 
     }
 
+    @FXML
     public void setErrorLbl(String err) {
         errorLbl.setText(err);
     }
