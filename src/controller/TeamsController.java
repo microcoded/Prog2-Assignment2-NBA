@@ -5,6 +5,7 @@ import au.edu.uts.ap.javafx.ViewLoader;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -93,7 +94,7 @@ public class TeamsController extends Controller<Teams> {
         }
 
         private String formatDouble(double value) {
-            return new DecimalFormat("#.00").format(value);
+            return new DecimalFormat("#####0.00").format(value);
         }
     }
     @FXML
@@ -127,6 +128,11 @@ public class TeamsController extends Controller<Teams> {
         return teamsList;
     }
 
+    public void refreshTable() {
+        teamsTV.setItems(parseTeams());
+        deselect();
+    }
+
     @FXML
     public void add() {
         try {
@@ -135,6 +141,7 @@ public class TeamsController extends Controller<Teams> {
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/edit.png"));
             stage.setResizable(false);
+            stage.setOnHidden(event -> refreshTable());
             ViewLoader.showStage(getTeams(), "/view/AddTeam.fxml", "Adding New Team", stage);
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,11 +153,16 @@ public class TeamsController extends Controller<Teams> {
         manageButton.setDisable(true);
         deleteButton.setDisable(true);
     }
+
+    public String selectedTeam() {
+        TeamInList selectedTeam = (TeamInList) teamsTV.getSelectionModel().getSelectedItem();
+        return selectedTeam.getName();
+    }
+
     @FXML
     public void manage() {
         try {
-            TeamInList selectedTeam = (TeamInList) teamsTV.getSelectionModel().getSelectedItem();
-            String name = selectedTeam.getName();
+            String name = selectedTeam();
 
             // Might need https://stackoverflow.com/questions/14187963/passing-parameters-javafx-fxml
 
@@ -169,7 +181,9 @@ public class TeamsController extends Controller<Teams> {
 
     @FXML
     public void delete() {
+        getTeams().remove(getTeams().getTeam(selectedTeam()));
         deselect();
+        refreshTable();
     }
 
     @FXML

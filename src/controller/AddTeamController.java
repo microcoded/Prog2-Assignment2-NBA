@@ -2,14 +2,22 @@ package controller;
 
 
 import au.edu.uts.ap.javafx.Controller;
+import au.edu.uts.ap.javafx.ViewLoader;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import model.Team;
 import model.Teams;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddTeamController extends Controller<Teams> {
 
@@ -33,7 +41,23 @@ public class AddTeamController extends Controller<Teams> {
 
     @FXML
     public void add() {
-        
+        String name = nameTf.getText();
+        if (getTeams().hasTeam(name)) {
+            try {
+                Stage stage = new Stage();
+                stage.setX(ViewLoader.X + 601);
+                stage.setY(ViewLoader.Y);
+                stage.getIcons().add(new Image("/view/nba.png"));
+                stage.setResizable(false);
+                ViewLoader.showStage(getTeams(), "/view/error.fxml", "Error!", stage);
+            } catch (IOException ex) {
+                Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            getTeams().addTeam(new Team(name));
+            Stage stage = (Stage) addButton.getScene().getWindow();
+            stage.close();
+        }
     }
 
 
