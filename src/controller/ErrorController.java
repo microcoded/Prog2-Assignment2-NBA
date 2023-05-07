@@ -20,12 +20,12 @@ public class ErrorController extends Controller<Teams> {
     public void initialize() {
         String error = "";
         for (String err : Association.validator.errors()) {
-            error += err + "\n";
+            error += err;
         }
         if (!error.equals("")) {
             errorTxt.setText(error);
         }
-        Association.validator.errors().clear();
+        Association.validator.clear();
     }
 
     @FXML

@@ -45,38 +45,54 @@ public class PlayerUpdateController extends Controller<Teams> {
         nameTf.textProperty().addListener(
                 (o, oldText, newText) -> updateButton.setDisable(
                         nameTf.getText().equals("")
+                        || creditTf.getText().equals("")
+                        || ageTf.getText().equals("")
+                        || NoTf.getText().equals("")
                 )
         );
         creditTf.textProperty().addListener(
                 (o, oldText, newText) -> updateButton.setDisable(
-                        creditTf.getText().equals("")
+                        nameTf.getText().equals("")
+                        || creditTf.getText().equals("")
+                        || ageTf.getText().equals("")
+                        || NoTf.getText().equals("")
                 )
         );
         ageTf.textProperty().addListener(
                 (o, oldText, newText) -> updateButton.setDisable(
-                        ageTf.getText().equals("")
+                        nameTf.getText().equals("")
+                        || creditTf.getText().equals("")
+                        || ageTf.getText().equals("")
+                        || NoTf.getText().equals("")
                 )
         );
         NoTf.textProperty().addListener(
                 (o, oldText, newText) -> updateButton.setDisable(
-                        NoTf.getText().equals("")
+                        nameTf.getText().equals("")
+                        || creditTf.getText().equals("")
+                        || ageTf.getText().equals("")
+                        || NoTf.getText().equals("")
                 )
         );
     }
 
     @FXML
     public void update() {
-        boolean valid = true;
+        String name = nameTf.getText();
+        String credit = creditTf.getText();
+        String age = ageTf.getText();
+        String No = NoTf.getText();
+        boolean valid = Association.validator.isValid(name, credit, age, No);
+        Association.validator.generateErrors(name, credit, age, No);
         if (valid) {
-            player.setName(nameTf.getText());
-            player.setCredit(Double.valueOf(creditTf.getText()));
-            player.setAge(Integer.parseInt(ageTf.getText()));
-            player.setNo(Integer.parseInt(NoTf.getText()));
+            player.setName(name);
+            player.setCredit(Double.valueOf(credit));
+            player.setAge(Integer.valueOf(age));
+            player.setNo(Integer.valueOf(No));
             Stage stage = (Stage) nameTf.getScene().getWindow();
             stage.setTitle("Updating Player: " + nameTf.getText());
         } else {
             try {
-                Association.validator.addError("Not implemented");
                 Stage stage = new Stage();
                 stage.setX(ViewLoader.X + 601);
                 stage.setY(ViewLoader.Y);

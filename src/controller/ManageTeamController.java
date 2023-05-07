@@ -90,6 +90,7 @@ public class ManageTeamController extends Controller<Teams> {
 
     @FXML
     public void close() {
+        getTeams().getTeam(teamName).setName(nameTf.getText());
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
