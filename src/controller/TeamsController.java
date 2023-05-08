@@ -141,6 +141,7 @@ public class TeamsController extends Controller<Teams> {
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/edit.png"));
             stage.setResizable(false);
+            stage.setOnHidden(event -> refreshTable());
             ViewLoader.showStage(getTeams(), "/view/ManageTeamView.fxml", "Managing Team: " + name, stage);
             // Deselect buttons
             deselect();

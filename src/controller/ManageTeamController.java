@@ -130,7 +130,8 @@ public class ManageTeamController extends Controller<Teams> {
     }
 
     public void refreshTable() {
-        manageTeamTV.setItems(parsePlayers());
+//        manageTeamTV.setItems(parsePlayers());
+        initialize();
         deselect();
     }
 
