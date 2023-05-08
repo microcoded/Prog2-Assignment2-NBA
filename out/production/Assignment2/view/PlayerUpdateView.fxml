@@ -21,13 +21,13 @@
             <Label styleClass="label-h2" text="Player Details" alignment="CENTER" />
         </TextFlow>
         <Label text="Player Name: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="nameTf" text="Not implemented" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="nameTf" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label text="Player Credit: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="creditTf" text="Not implemented" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="creditTf" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <Label text="Player Age: " GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="ageTf" text="Not implemented" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField fx:id="ageTf" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <Label text="Player No: " GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="NoTf" text="Not implemented" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="NoTf" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     </GridPane>
 
     <GridPane fx:id="buttonGrid" hgap="15" vgap="20" GridPane.halignment="CENTER" GridPane.valignment="CENTER" alignment="CENTER" prefHeight="90">

@@ -12,10 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.Player;
-import model.Players;
-import model.Team;
-import model.Teams;
+import model.*;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -25,6 +22,7 @@ import java.util.logging.Logger;
 public class ManageTeamController extends Controller<Teams> {
 
     public static String playerName = "";
+
     public Teams getTeams() {
         return this.model;
     }
@@ -41,6 +39,8 @@ public class ManageTeamController extends Controller<Teams> {
     @FXML private TableColumn No;
     private String teamName = "";
     public static Player selectedPlayer;
+
+    public static String mode = "";
 
     @FXML
     public void initialize() {
@@ -83,27 +83,57 @@ public class ManageTeamController extends Controller<Teams> {
         return playerList;
     }
 
-    public String selectedPlayer() {
+    public Player selectedPlayer() {
         selectedPlayer = (Player) manageTeamTV.getSelectionModel().getSelectedItem();
-        return selectedPlayer.getName();
+        return selectedPlayer;
     }
 
     @FXML
     public void close() {
-        getTeams().getTeam(teamName).setName(nameTf.getText());
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
+        String newName = nameTf.getText();
+        if (Association.validator.isValid(newName)) {
+            getTeams().getTeam(teamName).setName(nameTf.getText());
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+        } else {
+            try {
+                Association.validator.generateErrors(newName);
+                Stage stage = new Stage();
+                stage.setX(ViewLoader.X + 601);
+                stage.setY(ViewLoader.Y);
+                stage.getIcons().add(new Image("/view/nba.png"));
+                stage.setResizable(false);
+                ViewLoader.showStage(getTeams(), "/view/error.fxml", "Error!", stage);
+            } catch (IOException ex) {
+                Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+
     }
 
     @FXML
     public void add() {
-
+        try {
+            mode = "add";
+            Stage stage = new Stage();
+            stage.setX(ViewLoader.X + 601);
+            stage.setY(ViewLoader.Y);
+            stage.getIcons().add(new Image("/view/edit.png"));
+            stage.setResizable(false);
+            stage.setOnHidden(event -> refreshTable());
+            ViewLoader.showStage(getTeams(), "/view/PlayerUpdateView.fxml", "Adding New Player", stage);
+        } catch (IOException ex) {
+            Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     public void update() {
         try {
-            playerName = selectedPlayer();
+            mode = "update";
+            selectedPlayer = selectedPlayer();
+            playerName = selectedPlayer.getName();
             Stage stage = new Stage();
             stage.setX(ViewLoader.X + 601);
             stage.setY(ViewLoader.Y);
