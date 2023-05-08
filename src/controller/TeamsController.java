@@ -129,6 +129,9 @@ public class TeamsController extends Controller<Teams> {
 
     public String selectedTeam() {
         Team selectedTeam = (Team) teamsTV.getSelectionModel().getSelectedItem();
+        if (selectedTeam == null) {
+            return teamName;
+        }
         return selectedTeam.getName();
     }
 
