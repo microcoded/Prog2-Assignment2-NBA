@@ -121,7 +121,7 @@ public class ManageTeamController extends Controller<Teams> {
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/edit.png"));
             stage.setResizable(false);
-            stage.setOnHidden(event -> refreshTable());
+//            stage.setOnHidden(event -> refreshTable());
             ViewLoader.showStage(getTeams(), "/view/PlayerUpdateView.fxml", "Adding New Player", stage);
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,7 +139,6 @@ public class ManageTeamController extends Controller<Teams> {
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/edit.png"));
             stage.setResizable(false);
-            stage.setOnHidden(event -> refreshTable());
             ViewLoader.showStage(getTeams(), "/view/PlayerUpdateView.fxml", "Updating Player: " + playerName, stage);
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
