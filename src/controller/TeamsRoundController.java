@@ -2,6 +2,7 @@ package controller;
 
 
 import au.edu.uts.ap.javafx.Controller;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,7 +11,6 @@ import javafx.scene.control.TableView;
 import model.*;
 
 public class TeamsRoundController extends Controller<Season> {
-    Season season = getSeason();
 
     @FXML
     private TableView roundTv;
@@ -27,20 +27,12 @@ public class TeamsRoundController extends Controller<Season> {
     @FXML
     private Button arrangeBtn;
 
-    public Season getSeason() {
-//        return this.model;
-        return SeasonController.season;
-    }
 
     @FXML
     public void initialize() {
-        int round = getSeason().round();
-        round++;
-        season.addTeams(season.getCurrentTeams());
-        roundLbl.setText("Round: " + round);
+        System.out.println(this.model);
     }
 
 }
-
 
 

@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import model.Association;
+import model.Season;
+import model.Teams;
 
 public class AssociationController extends Controller<Association> {
 
@@ -26,11 +28,17 @@ public class AssociationController extends Controller<Association> {
 
     @FXML
     private GridPane buttonGrid;
-    
+
+    public static Association association;
+
+    @FXML
+    public void initialize() {
+        association = getAssociation();
+    }
     public Association getAssociation(){
         return this.model;
     }
-    
+
     @FXML
     public void exploreTeams() {
         try {

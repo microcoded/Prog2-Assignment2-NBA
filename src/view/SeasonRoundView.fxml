@@ -15,9 +15,13 @@
 <?import javafx.geometry.Insets?>  
 
 <VBox fx:controller="controller.TeamsRoundController" styleClass="background" alignment="CENTER" prefHeight="400" prefWidth="800" spacing="20" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="10" />
+    </padding>
+
     <Label fx:id="roundLbl" styleClass="label-h2" text="Not implemented"/>
-    <HBox alignment="CENTER">
-        <ListView fx:id="teamsLv"></ListView>
+    <HBox alignment="CENTER" spacing="10">
+        <ListView fx:id="teamsLv" />
         <Button fx:id="addBtn" text=">>>" disable="true"/>
         <TableView fx:id="roundTv">
 

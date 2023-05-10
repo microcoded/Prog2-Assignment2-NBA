@@ -35,7 +35,7 @@ public class SeasonController extends Controller<Season> {
     @FXML
     private GridPane buttonGrid;
 
-    public static Season season;
+    public Season season = getSeason();
 
     public Season getSeason() {
         return this.model;
