@@ -28,9 +28,13 @@ public class TeamsRoundController extends Controller<Season> {
     private Button arrangeBtn;
 
 
+    public Season getSeason() {
+        return this.model;
+    }
+
     @FXML
     public void initialize() {
-        System.out.println(this.model);
+        System.out.println(getSeason());
     }
 
 }
