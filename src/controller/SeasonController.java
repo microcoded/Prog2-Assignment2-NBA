@@ -72,12 +72,18 @@ public class SeasonController extends Controller<Season> {
     @FXML
     public void gamePressed() {
         try {
+            Association.validator.addError(getSeason().playGame());
+
             Stage stage = new Stage();
             stage.setX(ViewLoader.X + 601);
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/nba.png"));
             stage.setResizable(false);
             ViewLoader.showStage(getSeason(), "/view/error.fxml", "All Games Played!", stage);
+
+            Association.validator.clear();
+
+
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
         }

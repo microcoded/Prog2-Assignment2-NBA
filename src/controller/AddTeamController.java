@@ -45,7 +45,8 @@ public class AddTeamController extends Controller<Teams> {
 
     @FXML
     public void add() {
-        String name = nameTf.getText();
+        // Get team name, but remove trailing space if any with regex to avoid crashing when managing team.
+        String name = nameTf.getText().replaceFirst("\\s++$", "");
         if (getTeams().hasTeam(name)) {
             try {
                 Association.validator.addError(name + " Team already exists");
