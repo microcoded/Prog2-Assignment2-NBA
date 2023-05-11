@@ -35,7 +35,7 @@ public class SeasonController extends Controller<Season> {
     @FXML
     private GridPane buttonGrid;
 
-    public Season season = getSeason();
+//    public Season season = getSeason();
 
     public Season getSeason() {
         return this.model;
@@ -44,13 +44,13 @@ public class SeasonController extends Controller<Season> {
     @FXML
     public void roundPressed() {
         try {
-            season = getSeason();
+//            Season season = getSeason();
             Stage stage = new Stage();
             stage.setX(ViewLoader.X + 601);
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/nba.png"));
             stage.setResizable(false);
-            ViewLoader.showStage(getSeason().round(), "/view/SeasonRoundView.fxml", "Season Rounds", stage);
+            ViewLoader.showStage(getSeason(), "/view/SeasonRoundView.fxml", "Season Rounds", stage);
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -63,7 +63,7 @@ public class SeasonController extends Controller<Season> {
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/nba.png"));
             stage.setResizable(false);
-            ViewLoader.showStage(getSeason().getCurrentTeams(), "/view/CurrentRoundTeams.fxml", "Tournament", stage);
+            ViewLoader.showStage(getSeason(), "/view/CurrentRoundTeams.fxml", "Tournament", stage);
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,7 +77,7 @@ public class SeasonController extends Controller<Season> {
             stage.setY(ViewLoader.Y);
             stage.getIcons().add(new Image("/view/nba.png"));
             stage.setResizable(false);
-            ViewLoader.showStage(getSeason().getCurrentTeams(), "/view/error.fxml", "All Games Played!", stage);
+            ViewLoader.showStage(getSeason(), "/view/error.fxml", "All Games Played!", stage);
         } catch (IOException ex) {
             Logger.getLogger(AssociationController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -99,7 +99,6 @@ public class SeasonController extends Controller<Season> {
 
     @FXML
     public void close() {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
 }
