@@ -37,7 +37,7 @@ public class PlayerUpdateController extends Controller<Teams> {
 
     @FXML
     public void initialize() {
-        if (mode == "update") {
+        if (mode.equals("update")) {
 
             nameTf.setText(playerName);
             creditTf.setText(player.getCredit().toString());
@@ -80,7 +80,7 @@ public class PlayerUpdateController extends Controller<Teams> {
             );
         }
 
-        if (mode == "add") {
+        if (mode.equals("add")) {
             addButton.setDisable(true);
             // Enable add button when text is not empty
             nameTf.textProperty().addListener(
@@ -162,6 +162,7 @@ public class PlayerUpdateController extends Controller<Teams> {
                     Integer.parseInt(No)
                 )
             );
+            getTeams().getTeam(teamName).getCurrentPlayers();
             close();
         } else {
             showInputErrors();
